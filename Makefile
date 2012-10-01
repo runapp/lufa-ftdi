@@ -34,6 +34,7 @@ include $(LUFA_PATH)/Build/lufa_build.mk
 include $(LUFA_PATH)/Build/lufa_cppcheck.mk
 include $(LUFA_PATH)/Build/lufa_avrdude.mk
 include $(LUFA_PATH)/Build/lufa_atprogram.mk
+include $(LUFA_PATH)/Build/lufa_dfu.mk
 include $(LUFA_PATH)/Build/lufa_core.mk
 $(LUFA_PATH)/Build/lufa_core.mk:
 	@echo 'Did you forget "git submodule init; git submodule update"?'; false

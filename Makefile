@@ -29,12 +29,14 @@ term:
 .PHONY: term
 
 # Include LUFA build script makefiles
-include $(LUFA_PATH)/Build/lufa_core.mk
 include $(LUFA_PATH)/Build/lufa_sources.mk
 include $(LUFA_PATH)/Build/lufa_build.mk
 include $(LUFA_PATH)/Build/lufa_cppcheck.mk
 include $(LUFA_PATH)/Build/lufa_avrdude.mk
 include $(LUFA_PATH)/Build/lufa_atprogram.mk
+include $(LUFA_PATH)/Build/lufa_core.mk
+$(LUFA_PATH)/Build/lufa_core.mk:
+	@echo 'Did you forget "git submodule init; git submodule update"?'; false
 
 # Remove some stuff from BASE_CC_FLAGS that the LUFA core put in there.
 BASE_CC_FLAGS := $(filter-out -fno-inline-small-functions,$(BASE_CC_FLAGS))

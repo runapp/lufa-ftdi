@@ -1,6 +1,8 @@
 FTDI serial chip emulation for LUFA
 -----------------------------------
 
+Written by Jim Paris <jim@jtan.com>
+
 This project is an example of FTDI usb-to-serial chip emulation for
 LUFA.  It is fully interrupt-driven.  It acts as a FT232RL with id
 0403:6001.  On Linux, the corresponding host driver is `ftdi_sio`.

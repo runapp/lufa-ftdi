@@ -51,4 +51,5 @@ if the RX buffer is full, data received from the PC will be dropped.
 
 License
 -------
+
 BSD 2-clause, see LICENSE

@@ -9,6 +9,12 @@ Note that it's probably against the EULA of the proprietary FTDI
 Windows driver to use it with non-FTDI hardware.  And using someone
 else's VID will prevent you from passing USB-IF compliance tests.
 
+Building
+--------
+
+    git submodule init
+    make
+
 Configuration
 -------------
 

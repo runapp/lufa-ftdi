@@ -351,6 +351,16 @@ void EVENT_USB_Device_Reset(void)
 	USB_INT_Enable(USB_INT_RXSTPI);
 }
 
+/* Configure endpoint with the best available number of banks. */
+static inline bool ftdi_config_ep(uint8_t address, uint8_t type, uint16_t size)
+{
+	/* Try configuring the bulk endpoint with 2 banks. */
+	if (Endpoint_ConfigureEndpoint(address, type, size, 2))
+		return true;
+	/* On smaller parts, this will fail, so use 1 bank instead. */
+	return Endpoint_ConfigureEndpoint(address, type, size, 1);
+}
+
 void EVENT_USB_Device_ConfigurationChanged(void)
 {
 	uint8_t PrevSelectedEndpoint = Endpoint_GetCurrentEndpoint();
@@ -358,14 +368,12 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 	/* Configure endpoints */
 
 	/* IN */
-	Endpoint_ConfigureEndpoint(FTDI_TX_EPADDR,
-				   EP_TYPE_BULK, FTDI_TXRX_EPSIZE, 2);
+	ftdi_config_ep(FTDI_TX_EPADDR, EP_TYPE_BULK, FTDI_TXRX_EPSIZE);
 	Endpoint_SelectEndpoint(FTDI_TX_EPADDR);
 	UEIENX = (1 << TXINE);
 
 	/* OUT */
-	Endpoint_ConfigureEndpoint(FTDI_RX_EPADDR,
-				   EP_TYPE_BULK, FTDI_TXRX_EPSIZE, 2);
+	ftdi_config_ep(FTDI_RX_EPADDR, EP_TYPE_BULK, FTDI_TXRX_EPSIZE);
 	Endpoint_SelectEndpoint(FTDI_RX_EPADDR);
 	UEIENX = (1 << RXOUTE);
 

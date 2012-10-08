@@ -265,7 +265,7 @@ static const USB_Descriptor_Config_t PROGMEM ConfigurationDescriptor =
 		.Class    = 0xff,
 		.SubClass = 0xff,
 		.Protocol = 0xff,
-		.InterfaceStrIndex = 0,
+		.InterfaceStrIndex = 0x02,  /* Reuse product string */
 	},
 
 	.FTDI_DataInEndpoint = {

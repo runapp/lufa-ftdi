@@ -75,7 +75,13 @@ class Miniterm:
         try:
             while self.alive:
                 data = self.serial.read(1)
-                sys.stdout.write(data)
+                if not data:
+                    continue
+                if ((ord(data) >= 32 and ord(data) < 128) or
+                    data == '\r' or data == '\n' or data == '\t'):
+                    sys.stdout.write(data)
+                else:
+                    sys.stdout.write('\\x'+hex(ord(data))[2:])
                 sys.stdout.flush()
         except Exception as e:
             traceback.print_exc()

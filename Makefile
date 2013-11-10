@@ -25,7 +25,7 @@ DEVICE = /dev/serial/by-id/usb-LUFA_FT232_*
 
 # Open terminal on USB port
 term:
-	python terminal.py $(DEVICE)
+	terminal.py $(DEVICE)
 .PHONY: term
 
 # Include LUFA build script makefiles
